@@ -41,12 +41,17 @@ export function formatDateWithLunar(dateStr?: string): string {
     const solar = new SolarDate(new Date(y, m - 1, d));
     const lunar = solar.toLunarDate();
 
-    const solarDisplay = `${String(d).padStart(2, "0")}/${String(m).padStart(2, "0")}/${y}`;
-    const lunarDay = String(lunar.day).padStart(2, "0");
-    const lunarMonth = String(lunar.month).padStart(2, "0");
-    const canChi = getCanChi(lunar.year);
+    if (!lunar) {
+      const [y, m, d] = dateStr.split("-");
+      return `${d}/${m}/${y}`;
+    }
 
-    return `${solarDisplay} (AL: ${lunarDay}/${lunarMonth}/${lunar.year} - ${canChi})`;
+    const solarDisplay = `${String(d).padStart(2, "0")}/${String(m).padStart(2, "0")}/${y}`;
+    const lunarDay = String(lunar["day"]).padStart(2, "0");
+    const lunarMonth = String(lunar["month"]).padStart(2, "0");
+    const canChi = getCanChi(lunar["year"]);
+
+    return `${solarDisplay} (AL: ${lunarDay}/${lunarMonth}/${lunar["year"]} - ${canChi})`;
   } catch {
     // Fallback nếu ngày không hợp lệ
     const [y, m, d] = dateStr.split("-");
