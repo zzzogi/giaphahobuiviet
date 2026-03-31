@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Person {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  gender      String?
+  avatar      String?
+  dob         String?
+  dod         String?
+  biography   String?
+  parentId    String?  @db.ObjectId
+  isSpouseOf  String?  @db.ObjectId   // ID của người chính nếu là vợ/chồng
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

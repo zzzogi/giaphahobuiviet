@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "OngDo";
+  src: url("/fonts/HL-OngDo.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.animate-slide-in {
+  animation: slide-in 0.22s ease-out;
+}
+
+.input-base {
+  @apply w-full text-sm border border-slate-200 rounded-lg px-3 py-2
+         outline-none focus:ring-2 focus:ring-blue-300 bg-white;
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Desktop vẫn dùng slide-in từ phải */
+@media (min-width: 640px) {
+  .animate-modal {
+    animation: slide-in 0.22s ease-out forwards;
+  }
+}
+
+@media (max-width: 639px) {
+  .animate-modal {
+    animation: slideUp 0.22s ease-out forwards;
+  }
+}
