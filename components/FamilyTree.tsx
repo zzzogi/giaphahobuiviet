@@ -74,9 +74,12 @@ function FamilyTreeInner() {
     () => initialState?.collapsed ?? new Set(),
   );
 
-  if (initialState) {
-    setCollapsedIds(initialState.collapsed);
-    setLayoutPositions(initialState.positions);
+  const [prevInitialState, setPrevInitialState] = useState(initialState);
+
+  if (initialState !== prevInitialState) {
+    setPrevInitialState(initialState);
+    setLayoutPositions(initialState?.positions ?? new Map());
+    setCollapsedIds(initialState?.collapsed ?? new Set());
   }
 
   // ── Flag để track initial zoom ─────────────────────────────────────────────
